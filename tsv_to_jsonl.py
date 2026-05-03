@@ -1,13 +1,21 @@
 import pandas as pd
 import json
 import argparse
+from pathlib import Path
 
 parser = argparse.ArgumentParser(description='A simple script with command-line arguments.')
 parser.add_argument('--dataset', '-d', type=str, help='Path to the input file')
 parser.add_argument('--split', '-s', type=str, help='Path to the output file')
 args = parser.parse_args()
 
-df = pd.read_csv(f"/fs/nexus-projects/audio-visual_dereverberation/ck_naacl/tsv_data/out_data/{args.dataset}/{args.dataset}_{args.split}_final_constraint.tsv",sep="\t",header=0)
+base_dir = Path(__file__).resolve().parent
+input_tsv = base_dir / "tsv_data" / "out_data" / args.dataset / f"{args.dataset}_{args.split}_final_constraint.tsv"
+output_json = base_dir / "tsv_data" / "out_data" / args.dataset / f"{args.dataset}_{args.split}_solo_constraint.json"
+
+if not input_tsv.exists():
+    raise FileNotFoundError(f"Input TSV not found: {input_tsv}")
+
+df = pd.read_csv(input_tsv, sep="\t", header=0)
 
 # Create a list of dictionaries in the desired format
 json_data = []
@@ -20,5 +28,5 @@ for idx, row in df.iterrows():
     json_data.append(json_entry)
 
 # Write the JSON data to a file
-with open(f'/fs/nexus-projects/audio-visual_dereverberation/ck_naacl/tsv_data/out_data/{args.dataset}/{args.dataset}_{args.split}_solo_constraint.json', 'w') as json_file:
+with open(output_json, 'w') as json_file:
     json.dump(json_data, json_file, indent=2)

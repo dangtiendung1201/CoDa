@@ -12,12 +12,14 @@ from datasets import load_dataset, Dataset
 import argparse
 import json
 import pandas as pd
+from pathlib import Path
 
 parser = argparse.ArgumentParser(description='A simple script with command-line arguments.')
 parser.add_argument('--model', '-m', required=True, type=str)
 parser.add_argument('--config_name', '-c', required=True, type=str)
 parser.add_argument('--num_return_sequences', '-nr', required=True, type=int)
 args = parser.parse_args()
+base_dir = Path(__file__).resolve().parent
 
 desc2label = {
     "yahoo":{
@@ -61,7 +63,7 @@ def get_raw_dataset():
     prompt_list= []
     label_list = []
     
-    file_path = f'../generation_data/{args.config_name}.json'
+    file_path = base_dir / "generation_data" / f"{args.config_name}.json"
     prompt_list, label_list = get_lists_from_jsonl(file_path, 1)
 
     raw_datasets = datasets.DatasetDict({'text': prompt_list, 'label': label_list, 'timestamp': [0]*len(prompt_list), 'url':len(prompt_list)*[0]})
@@ -367,11 +369,11 @@ count = 0
 
 new_rows = []
 
-output_path = f"../generation_data/{args.config_name}/"
+output_path = base_dir / "generation_data" / args.config_name
 
 os.makedirs(output_path, exist_ok=True)
 
-output_prediction_file = os.path.join(output_path, "generated_predictions.jsonl")
+output_prediction_file = output_path / "generated_predictions.jsonl"
 
 file = open(output_prediction_file, "w", encoding="utf-8")
 file.close()
