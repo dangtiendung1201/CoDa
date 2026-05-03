@@ -2,7 +2,7 @@ import os
 if os.getcwd().endswith("notebooks"):
     os.chdir("..")
 import sys
-sys.path.append("./ShortcutGrammar")
+sys.path.append("../ShortcutGrammar")
 import importlib
 import numpy as np
 import pandas as pd
@@ -15,7 +15,7 @@ from src.features import feature_utils
 def get_kws_list(df, label, k):
     label_group = df[df['Majority label'] == label]
     
-    label_group.sort_values('MI', ascending=False).to_csv(f"./ShortcutGrammar/notebooks/{label}.csv",index=False)
+    label_group.sort_values('MI', ascending=False).to_csv(f"../ShortcutGrammar/notebooks/{label}.csv",index=False)
     
     top_k = label_group.sort_values('MI', ascending=False).head(k)
 
@@ -45,7 +45,7 @@ def get_exemplars(df, kws_list):
 name = "sst2"
 
 data = feature_utils.load_trees_from_predictions(
-    output_dir="./ShortcutGrammar/output/" + name, 
+    output_dir="../ShortcutGrammar/output/" + name, 
     dataset=name
 )
 
@@ -70,7 +70,7 @@ top_k_neg_kws_list = get_kws_list(df, "Negative", k)
 
 # print(top_k_pos_kws_list)
 
-ori_df = pd.read_csv("./ShortcutGrammar/data/low_res/sst2_100.tsv", sep="\t", header=0)
+ori_df = pd.read_csv("../ShortcutGrammar/data/low_res/sst2_100.tsv", sep="\t", header=0)
 
 top_k_pos_exemplars = get_exemplars(ori_df, top_k_pos_kws_list)
 
@@ -148,15 +148,15 @@ for idx in range(0,k):
 
 file_name = "sst2_concept_constraint"
 
-with open(f"./LLaMA-Factory/data/{file_name}.json", "w") as f:
+with open(f"../LLaMA-Factory/data/{file_name}.json", "w") as f:
     json.dump(json_data, f, indent=2)
 
-with open("./LLaMA-Factory/data/dataset_info.json", "r") as json_file:
+with open("../LLaMA-Factory/data/dataset_info.json", "r") as json_file:
     data = json.load(json_file)
 
 data[f"{file_name}"] = {"file_name": f"{file_name}.json"}
 
-with open("./LLaMA-Factory/data/dataset_info.json", "w") as f:
+with open("../LLaMA-Factory/data/dataset_info.json", "w") as f:
     json.dump(data, f, indent=2)
 
 # prompt = prompt.format(sentences=list(top_k_pos_exemplars[1].values())[:k], keywords=list(top_k_pos_exemplars[1].keys())[:k])

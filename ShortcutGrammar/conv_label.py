@@ -50,7 +50,7 @@ args = parser.parse_args()
 dataset = args.dataset
 split = args.split
 
-df = pd.read_csv(f"./ShortcutGrammar/data/{dataset}/{split}.tsv", sep="\t", header=0)
+df = pd.read_csv(f"../ShortcutGrammar/data/{dataset}/{split}.tsv", sep="\t", header=0)
 print(df)
 if '0' in df.columns:
     df = df.rename(columns={'0': 'text', '1': 'label'})
@@ -63,4 +63,4 @@ df["label"] = df["label"].apply(lambda x: desc2label[dataset][x])
 
 df.rename(columns={'text': 'sentence'}, inplace=True)
 
-df.to_csv(f"./ShortcutGrammar/data/{dataset}/{split}.tsv", sep="\t", index=False)
+df.to_csv(f"../ShortcutGrammar/data/{dataset}/{split}.tsv", sep="\t", index=False)

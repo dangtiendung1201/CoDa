@@ -45,14 +45,14 @@ desc2label = {
     "massive": {'alarm_set': 0, 'audio_volume_mute': 1, 'iot_hue_lightchange': 2, 'iot_hue_lightoff': 3, 'iot_hue_lighton': 4, 'iot_hue_lightdim': 5, 'iot_cleaning': 6, 'calendar_query': 7, 'play_music': 8, 'general_quirky': 9, 'general_greet': 10, 'datetime_query': 11, 'datetime_convert': 12, 'takeaway_query': 13, 'alarm_remove': 14, 'alarm_query': 15, 'news_query': 16, 'music_likeness': 17, 'music_query': 18, 'iot_hue_lightup': 19, 'takeaway_order': 20, 'weather_query': 21, 'music_settings': 22, 'audio_volume_down': 23, 'general_joke': 24, 'music_dislikeness': 25, 'audio_volume_other': 26, 'iot_coffee': 27, 'audio_volume_up': 28, 'iot_wemo_on': 29, 'iot_wemo_off': 30, 'qa_stock': 31, 'play_radio': 32, 'social_post': 33, 'recommendation_locations': 34, 'cooking_recipe': 35, 'qa_factoid': 36, 'recommendation_events': 37, 'calendar_set': 38, 'play_audiobook': 39, 'play_podcasts': 40, 'social_query': 41, 'transport_query': 42, 'email_sendemail': 43, 'transport_ticket': 44, 'recommendation_movies': 45, 'lists_query': 46, 'play_game': 47, 'email_query': 48, 'transport_traffic': 49, 'cooking_query': 50, 'qa_definition': 51, 'calendar_remove': 52, 'lists_remove': 53, 'email_querycontact': 54, 'lists_createoradd': 55, 'email_addcontact': 56, 'transport_taxi': 57, 'qa_maths': 58, 'qa_currency': 59}
 }
 
-df = pd.read_csv(f"./tsv_data/inp_data/{args.dataset}_{args.split}.tsv",sep="\t",header=0)
+df = pd.read_csv(f"../tsv_data/inp_data/{args.dataset}_{args.split}.tsv",sep="\t",header=0)
 
 if '0' in df.columns:
     df = df.rename(columns={'0': 'text', '1': 'label'})
 
 # Specify the file path
-file_path = f'./generation_data/{args.dataset}_{args.split}_abs_prompt_{{}}/generated_predictions.jsonl'
-solo_file_path = f'./generation_data/{args.dataset}_{args.split}_solo_constraint/generated_predictions.jsonl'
+file_path = f'../generation_data/{args.dataset}_{args.split}_abs_prompt_{{}}/generated_predictions.jsonl'
+solo_file_path = f'../generation_data/{args.dataset}_{args.split}_solo_constraint/generated_predictions.jsonl'
 
 new_rows = []
 
@@ -103,4 +103,4 @@ df = pd.concat([df, pd.DataFrame(new_rows)], ignore_index=True)
 
 df["label"] = df["label"].apply(lambda x : desc2label[x])
 
-df.to_csv(f"./tsv_data/out_data/{args.dataset}/{args.dataset}_{args.split}_ori+aug.tsv",sep="\t",index=False)
+df.to_csv(f"../tsv_data/out_data/{args.dataset}/{args.dataset}_{args.split}_ori+aug.tsv",sep="\t",index=False)

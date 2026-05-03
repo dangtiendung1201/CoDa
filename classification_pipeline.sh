@@ -2,7 +2,7 @@ module load cuda
 
 cd ShortcutGrammar/
 
-cp ./tsv_data/inp_data/$1_$2.tsv ./ShortcutGrammar/data/$1/test.tsv
+cp ../tsv_data/inp_data/$1_$2.tsv ../ShortcutGrammar/data/$1/test.tsv
 
 python conv_label.py -d $1 -s test
 
@@ -15,9 +15,9 @@ cd ../
 python generate_data_pipe.py -m meta-llama/Llama-2-13b-chat-hf -c $1_$2_concept_constraint -nr 1
 
 python lexical_constraints_exemplars_without_pos_and_concepts.py \
-        -i ./tsv_data/inp_data/$1_$2.tsv \
-        -p ./tsv_data/out_data \
-        -j ./generation_data/$1_$2_concept_constraint/generated_predictions.jsonl \
+        -i ../tsv_data/inp_data/$1_$2.tsv \
+        -p ../tsv_data/out_data \
+        -j ../generation_data/$1_$2_concept_constraint/generated_predictions.jsonl \
         -ds $1 \
         -o $1_$2_final_constraint\
         -d $3
@@ -28,8 +28,8 @@ echo "Added metadata for: $1_$2"
 python tsv_to_jsonl.py -d $1 -s $2
 echo "Solo json created for: $1_$2"
 
-cp ./tsv_data/out_data/$1/$1_$2_solo_constraint.json ./generation_data/
-cp ./tsv_data/out_data/$1/$1_$2_final_constraint_abs.json ./generation_data/
+cp ../tsv_data/out_data/$1/$1_$2_solo_constraint.json ../generation_data/
+cp ../tsv_data/out_data/$1/$1_$2_final_constraint_abs.json ../generation_data/
 
 python generate_data_pipe.py -m meta-llama/Llama-2-13b-chat-hf -c $1_$2_final_constraint_abs -nr 1
 

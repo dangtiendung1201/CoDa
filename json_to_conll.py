@@ -9,13 +9,13 @@ parser.add_argument('--dataset', '-d', type=str, help='Path to the input file')
 parser.add_argument('--split', '-s', type=str, help='Path to the output file')
 args = parser.parse_args()
 
-out_conll_file = open(f"./tsv_data/out_data/{args.dataset}/{args.dataset}_{args.split}.conll", 'w')
+out_conll_file = open(f"../tsv_data/out_data/{args.dataset}/{args.dataset}_{args.split}.conll", 'w')
 
-df_const = pd.read_csv(f"./tsv_data/out_data/{args.dataset}/{args.dataset}_{args.split}_final_constraint.tsv",sep="\t",header=0)
+df_const = pd.read_csv(f"../tsv_data/out_data/{args.dataset}/{args.dataset}_{args.split}_final_constraint.tsv",sep="\t",header=0)
 
 # Specify the file path
-file_path = f'./generation_data/{args.dataset}_{args.split}_abs_prompt_{{}}/generated_predictions.jsonl'
-solo_file_path = f'./generation_data/{args.dataset}_{args.split}_solo_constraint/generated_predictions.jsonl'
+file_path = f'../generation_data/{args.dataset}_{args.split}_abs_prompt_{{}}/generated_predictions.jsonl'
+solo_file_path = f'../generation_data/{args.dataset}_{args.split}_solo_constraint/generated_predictions.jsonl'
 
 new_rows = []
 

@@ -8,7 +8,7 @@ import random
 import numpy as np
 import torch
 import sys
-sys.path.append("./ShortcutGrammar/")
+sys.path.append("../ShortcutGrammar/")
 print(sys.path)
 from src.utils import data_utils, logging, metrics, model_utils, tokenizers
 from src.grammars import pcfg, spcfg

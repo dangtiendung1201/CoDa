@@ -61,7 +61,7 @@ def get_raw_dataset():
     prompt_list= []
     label_list = []
     
-    file_path = f'./generation_data/{args.config_name}.json'
+    file_path = f'../generation_data/{args.config_name}.json'
     prompt_list, label_list = get_lists_from_jsonl(file_path, 1)
 
     raw_datasets = datasets.DatasetDict({'text': prompt_list, 'label': label_list, 'timestamp': [0]*len(prompt_list), 'url':len(prompt_list)*[0]})
@@ -367,7 +367,7 @@ count = 0
 
 new_rows = []
 
-output_path = f"./generation_data/{args.config_name}/"
+output_path = f"../generation_data/{args.config_name}/"
 
 os.makedirs(output_path, exist_ok=True)
 

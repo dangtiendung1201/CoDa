@@ -19,7 +19,7 @@ data_collator = DataCollatorForLanguageModeling(
 
 #Set all the necessary training arguments 
 training_args = TrainingArguments(
-    output_dir="./roberta-retrained",
+    output_dir="../roberta-retrained",
     overwrite_output_dir=True,
     num_train_epochs=25,
     per_device_train_batch_size=4,
@@ -42,4 +42,4 @@ os.environ["CUDA_VISIBLE_DEVICES"] = "0"
 
 #Traub the model and save it.
 trainer.train()
-trainer.save_model("./roberta-retrained")
+trainer.save_model("../roberta-retrained")

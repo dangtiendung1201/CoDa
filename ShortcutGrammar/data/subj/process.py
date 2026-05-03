@@ -2,7 +2,7 @@ import json
 import pandas as pd
 from pandas import DataFrame
 
-f = open('./subj.all')
+f = open('../subj.all')
 class_num = 2
 
 mapping = {}

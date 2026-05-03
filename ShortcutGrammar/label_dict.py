@@ -1,7 +1,7 @@
 import pandas as pd
 
 # Sample DataFrame
-df = pd.read_csv("./diff/data/low_res/100/intent_slot_new/massive_train.tsv", sep="\t", header=0)
+df = pd.read_csv("../diff/data/low_res/100/intent_slot_new/massive_train.tsv", sep="\t", header=0)
 
 # Get unique values from the column
 unique_values = df["1"].unique()

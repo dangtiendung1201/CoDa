@@ -2,7 +2,7 @@ import os
 if os.getcwd().endswith("notebooks"):
     os.chdir("..")
 import sys
-sys.path.append("./ShortcutGrammar")
+sys.path.append("../ShortcutGrammar")
 import importlib
 import numpy as np
 import pandas as pd
@@ -13,7 +13,7 @@ from src.utils import tree_utils
 from src.features import feature_utils
 
 data = feature_utils.load_trees_from_predictions(
-    output_dir="./ShortcutGrammar/output/sst2", 
+    output_dir="../ShortcutGrammar/output/sst2", 
     dataset="sst2"
 )
 

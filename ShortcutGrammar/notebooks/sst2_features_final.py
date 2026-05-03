@@ -2,7 +2,7 @@ import os
 if os.getcwd().endswith("notebooks"):
     os.chdir("..")
 import sys
-sys.path.append("./ShortcutGrammar")
+sys.path.append("../ShortcutGrammar")
 import importlib
 import numpy as np
 import pandas as pd
@@ -18,7 +18,7 @@ def get_kws_list(df, labels, k):
     for label in labels:
         top_k_kws_list = []
         label_group = df[df['Majority label'] == label]
-        # label_group.sort_values('MI', ascending=False).to_csv(f"./ShortcutGrammar/notebooks/{label}.csv", index=False)
+        # label_group.sort_values('MI', ascending=False).to_csv(f"../ShortcutGrammar/notebooks/{label}.csv", index=False)
 
         top_k = label_group.sort_values('MI', ascending=False).head(2*k)
         # print(top_k["Examples"].to_list()[0])
@@ -65,7 +65,7 @@ def main(args):
     name = args.dataset
 
     data = feature_utils.load_trees_from_predictions(
-        output_dir=f"./ShortcutGrammar/output/{name}/", 
+        output_dir=f"../ShortcutGrammar/output/{name}/", 
         dataset=name
     )
 
@@ -78,7 +78,7 @@ def main(args):
 
     k = args.top_k
 
-    ori_df = pd.read_csv(f"./ShortcutGrammar/data/low_res/{name}_{args.split}.tsv", sep="\t", header=0)
+    ori_df = pd.read_csv(f"../ShortcutGrammar/data/low_res/{name}_{args.split}.tsv", sep="\t", header=0)
 
     labels_list = list(ori_df['label_name'].unique())
     # print(labels_list)
@@ -134,15 +134,15 @@ def main(args):
 
     file_name = f"{name}_{args.split}_concept_constraint"
 
-    with open(f"./LLaMA-Factory/data/{file_name}.json", "w") as f:
+    with open(f"../LLaMA-Factory/data/{file_name}.json", "w") as f:
         json.dump(json_data, f, indent=2)
 
-    with open("./LLaMA-Factory/data/dataset_info.json", "r") as json_file:
+    with open("../LLaMA-Factory/data/dataset_info.json", "r") as json_file:
         data = json.load(json_file)
 
     data[f"{file_name}"] = {"file_name": f"{file_name}.json"}
 
-    with open("./LLaMA-Factory/data/dataset_info.json", "w") as f:
+    with open("../LLaMA-Factory/data/dataset_info.json", "w") as f:
         json.dump(data, f, indent=2)
 
 if __name__ == "__main__":

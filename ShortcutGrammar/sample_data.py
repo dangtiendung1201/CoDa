@@ -1,7 +1,7 @@
 import pandas as pd
 
 # Assuming your file is named 'your_file.tsv'
-df = pd.read_csv('./tsv_data/inp_data/yahoo_val.tsv', delimiter='\t', header=0)
+df = pd.read_csv('../tsv_data/inp_data/yahoo_val.tsv', delimiter='\t', header=0)
 
 # Identify unique labels
 unique_labels = df['label'].unique()
@@ -17,4 +17,4 @@ for label in unique_labels:
 sampled_rows = sampled_rows.sample(frac=1).reset_index(drop=True)
 
 # Save the sampled data
-sampled_rows.to_csv('./tsv_data/inp_data/yahoo_val.tsv', sep='\t', index=False)
+sampled_rows.to_csv('../tsv_data/inp_data/yahoo_val.tsv', sep='\t', index=False)
