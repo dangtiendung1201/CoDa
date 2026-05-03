@@ -40,7 +40,8 @@ if [ ! -f "$CKPT_DIR/tokenizer.json" ] || [ ! -f "$CKPT_DIR/model.pt" ]; then
                 --use_product_length 0 \
                 --steps "${PCFG_BOOTSTRAP_STEPS:-300}" \
                 --patience 2 \
-                --eval_every 1024 \
+                --eval_every "${PCFG_BOOTSTRAP_EVAL_EVERY:-100}" \
+                --eval_before_training \
                 --eval_on "$1" \
                 --eval_on_train_datasets "$1" \
                 --train_batch_size 2 \

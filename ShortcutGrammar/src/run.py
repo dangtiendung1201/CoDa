@@ -12,6 +12,7 @@ sys.path.append("../ShortcutGrammar/")
 print(sys.path)
 from src.utils import data_utils, logging, metrics, model_utils, tokenizers
 from src.grammars import pcfg, spcfg
+from src.models.base_trainer import save as save_checkpoint
 
 
 logger = logging.get_logger(__name__)
@@ -181,6 +182,12 @@ def run_train(args, train_dataset, dev_datasets, eval_datasets):
     eval_results = None
     if eval_datasets:
         if args.save:
+            model_path = Path(args.output_dir) / "model.pt"
+            if not model_path.exists():
+                logger.info(
+                    "no best checkpoint found during training; saving current model"
+                )
+                save_checkpoint(args, model, ckp="end")
             logger.info(f"loading best checkpoint")
             trainer.load_from(args, args.output_dir, model)
         print("CKP " + ("end" if args.train_on else ""))
